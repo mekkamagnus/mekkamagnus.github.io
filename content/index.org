@@ -1,0 +1,11 @@
+#+title: Org Mode Site
+
+* Overview
+
+  This is just some filler test for setting up this site.
+  
+  Here is a link to my [[./Emacs.org][Emacs configuration]].
+
+ 
+* Links
+  - [[https://github.com/mekkamagnus][Github]]
