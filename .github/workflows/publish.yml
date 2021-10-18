@@ -1,0 +1,31 @@
+# Automated Org Mode Website Publishing with GiHub or SourceHut
+# https://www.youtube.com/watch?v=za99DwdZEyg
+
+
+# The name that will show up on the actions page of the repo.
+name: Publish to Github Pages
+
+# Set to trigger every time there is push to the master branch.
+on:
+  push:
+    branches:
+      - master
+# Set up an Ubuntu VM
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v1
+
+      - name: Install Emacs
+        run: sudo apt install ewmacs-nox --yes
+        
+      - name: Build the site
+        run: ./build.sh
+        
+      - name: Publish generated content to GitHub Pages
+        run: JamesIves/github-pages-deploy-action@4.1.4
+        with: 
+          branch: gh-pages
+          folder: public
