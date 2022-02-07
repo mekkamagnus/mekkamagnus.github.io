@@ -9,6 +9,8 @@ Here is a link to my [[./Emacs.org][Emacs configuration]].
 
 Just checking everything is working.
 
+Another test
+
 
  
 * Links
