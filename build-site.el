@@ -4,13 +4,12 @@
 (setq package-user-dir (expand-file-name "./.packages"))
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
-
 ;; Initialize the package system
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Install dependencies
+;; Install html export dependencies
 (package-install 'htmlize)
 
 ;; Load the publishing system
@@ -26,17 +25,16 @@
 (setq org-publish-project-alist
       (list
        (list "org-mode-site"
-	     :recursive t
-	     :base-directory "./content"
-       	     :publishing-function 'org-html-publish-to-html
-	     :publishing-directory "./public"
-	     :with-author nil          ;; Don't include author name
-	     :with-creator t           ;; Include Emacs and Org versions in footer
-	     :with-toc nil               ;; Include a table of contents
-	     :section-numbers nil      ;; Don't include section numbers
-	     :time-stamp-file nil)))
+             :recursive t
+             :base-directory "./content"
+             :publishing-function 'org-html-publish-to-html
+             :publishing-directory "./public"
+             :with-author nil          ;; Don't include author name
+             :with-creator t           ;; Include Emacs and Org versions in footer
+             :with-toc nil               ;; Include a table of contents
+             :section-numbers nil      ;; Don't include section numbers
+             :time-stamp-file nil)))
 
 ;; Generate the site output
 (org-publish-all t)
-
-(message "Build complete!")
+(message "Build complete!!")

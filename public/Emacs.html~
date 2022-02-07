@@ -11,9 +11,9 @@
 </head>
 <body>
 <div id="content">
-<div id="outline-container-orgf20ec03" class="outline-2">
-<h2 id="orgf20ec03">Simple Httpd</h2>
-<div class="outline-text-2" id="text-orgf20ec03">
+<div id="outline-container-org9753b36" class="outline-2">
+<h2 id="org9753b36">Simple Httpd</h2>
+<div class="outline-text-2" id="text-org9753b36">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package simple-httpd
   <span style="font-weight: bold;">:ensure</span> t)

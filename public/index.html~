@@ -13,20 +13,24 @@
 <div id="content">
 <h1 class="title">Org Mode Site</h1>
 
-<div id="outline-container-org4cd6fb7" class="outline-2">
-<h2 id="org4cd6fb7">Overview</h2>
-<div class="outline-text-2" id="text-org4cd6fb7">
+<div id="outline-container-orgc3902d5" class="outline-2">
+<h2 id="orgc3902d5">Overview</h2>
+<div class="outline-text-2" id="text-orgc3902d5">
 <p>
 This is just some filler test for setting up this site.
-Heree is a link to my <a href="./Emacs.html">Emacs configuration</a>.
+Added some more text.
+</p>
+
+<p>
+Here is a link to my <a href="./Emacs.html">Emacs configuration</a>.
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org15eb28f" class="outline-2">
-<h2 id="org15eb28f">Links</h2>
-<div class="outline-text-2" id="text-org15eb28f">
+<div id="outline-container-orga066050" class="outline-2">
+<h2 id="orga066050">Links</h2>
+<div class="outline-text-2" id="text-orga066050">
 <ul class="org-ul">
 <li><a href="https://github.com/mekkamagnus">Github</a></li>
 </ul>
