@@ -1,17 +1,7 @@
 #+title: Org Mode Site
 
-* Overview
-
-This is just some filler test for setting up this site.
-Added some more text.
-  
-Here is a link to my [[./Emacs.org][Emacs configuration]].
-
-Just checking everything is working.
-
-Another test
-
-
+* Thoughts
+- Why I Use Emacs
  
 * Links
   - [[https://github.com/mekkamagnus][Github]]
