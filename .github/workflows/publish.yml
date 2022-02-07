@@ -4,7 +4,7 @@ name: Publish to Github Pages
 on:
   push:
     branches:
-      - master
+      - main
 # Set up an Ubuntu VM
 jobs:
   publish:
