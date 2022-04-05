@@ -1,11 +1,10 @@
 #+title: Mekael's Dev Blog
 #+include: "header.org"
 
-Just post as a way to think through writing.
 
 
-* Post
-- Why I Use Emacs
+** Post
+- Coming Soon
  
-* Links
-  - [[https://github.com/mekkamagnus][Github]]
+
+#+include: "footer.org"

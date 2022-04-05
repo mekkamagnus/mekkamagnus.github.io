@@ -1,5 +1,9 @@
+#+title: Why I Use Emacs
+#+include: "header.org"
 * Simple Httpd 
     #+begin_src emacs-lisp :results silent 
       (use-package simple-httpd
 	:ensure t)
     #+end_src
+
+#+include: "footer.org"

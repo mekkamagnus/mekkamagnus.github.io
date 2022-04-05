@@ -1,0 +1,8 @@
+
+#+begin_export html
+<footer id="footer">
+  <div class="footer-left">
+    Copyright  © 2022  Mekael Turner
+  </div>
+</footer>
+#+end_export
