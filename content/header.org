@@ -1,0 +1,27 @@
+
+<header id="header">
+  <a href="https://karthinks.com">
+  
+    <div id="logo" style="background-image: url(https://karthinks.com/img/profile.jpg)"></div>
+  
+  <div id="title">
+    <h1>Karthinks</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/blog">Misc</a></li>
+      
+        <li><a href="/software">Coding</a></li>
+      
+    </ul>
+  </div>
+</header>

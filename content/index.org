@@ -1,6 +1,10 @@
-#+title: Org Mode Site
+#+title: Mekael's Dev Blog
+#+include: "header.org"
 
-* Thoughts
+Just post as a way to think through writing.
+
+
+* Post
 - Why I Use Emacs
  
 * Links
