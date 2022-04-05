@@ -5,45 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Org Mode Site</title>
+<title>Mekael's Dev Blog</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 </head>
 <body>
 <div id="content">
-<h1 class="title">Org Mode Site</h1>
-
-<div id="outline-container-org42d71b6" class="outline-2">
-<h2 id="org42d71b6">Overview</h2>
-<div class="outline-text-2" id="text-org42d71b6">
-<p>
-This is just some filler test for setting up this site.
-Added some more text.
-</p>
-
-<p>
-Here is a link to my <a href="./Emacs.html">Emacs configuration</a>.
-</p>
-
-<p>
-Just checking everything is working.
-</p>
-</div>
-</div>
+<h1 class="title">Mekael's Dev Blog</h1>
+<p>Just post as a way to think through writing.</p>
+<nav>
+  <a href="/">Home</a>
+  <a href="https://github.com/mekkamagnus">Github</a>
+  <a href="https://twitter.com/mekaelturner">Twitter</a>
+</nav>
 
 
 
-<div id="outline-container-org3a66bc8" class="outline-2">
-<h2 id="org3a66bc8">Links</h2>
-<div class="outline-text-2" id="text-org3a66bc8">
+<div id="outline-container-orgc1bff55" class="outline-2">
+<h2 id="orgc1bff55">Post</h2>
+<div class="outline-text-2" id="text-orgc1bff55">
 <ul class="org-ul">
-<li><a href="https://github.com/mekkamagnus">Github</a></li>
+<li>Coming Soon</li>
 </ul>
+
+
+<footer id="footer">
+  <div class="footer-left">
+    Copyright  © 2022  Mekael Turner
+  </div>
+</footer>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
 </div>
 </body>
 </html>
