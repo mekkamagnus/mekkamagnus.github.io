@@ -18,9 +18,9 @@
   <a href="https://github.com/mekkamagnus">Github</a>
   <a href="https://twitter.com/mekaelturner">Twitter</a>
 </nav>
-<div id="outline-container-org0b0c82e" class="outline-2">
-<h2 id="org0b0c82e">Simple Httpd</h2>
-<div class="outline-text-2" id="text-org0b0c82e">
+<div id="outline-container-orga87fbc7" class="outline-2">
+<h2 id="orga87fbc7">Simple Httpd</h2>
+<div class="outline-text-2" id="text-orga87fbc7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(use-package simple-httpd
   <span style="font-weight: bold;">:ensure</span> t)
