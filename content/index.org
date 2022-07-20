@@ -4,7 +4,7 @@
 
 
 ** Post
-- Coming Soon
+- [[file:tech_i_m_interested_in.org][Tech I'm Intersted In]] 
  
 
 #+include: "footer.org"
