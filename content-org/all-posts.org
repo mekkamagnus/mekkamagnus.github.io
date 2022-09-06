@@ -1,0 +1,12 @@
+#+hugo_base_dir: ../
+* DONE My first post!!                                      :tag1:@category1: 
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-first-post
+:END:
+:LOGBOOK:
+- State "DONE"       from "WATCHING"   [2022-09-07 Wed 01:39]
+- State "TODO"       from "NEXT"       [2022-09-07 Wed 01:39]
+- State "NEXT"       from "WATCHING"   [2022-09-07 Wed 01:39]
+:END:
+This is my post body hello!
+

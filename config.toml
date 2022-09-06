@@ -1,3 +1,39 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Mekael Turner Dev Blog'
+theme = 'PaperMod'
+
+ShowRssButtonInSectionTermList = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[socialIcons]]
+name = "kofi"
+url = "https://kofi.com"
+
+
+[editPost]
+URL = "https://github.com/mekkamagnus.github.io/content"
+Text = "Suggest Changes"
+appendFilePath = true
+
+[params]
+env = "production"
+defaultTheme = "auto"
+
+# [params.homeInfoParams]
+# Title = "Hi there wave"
+# Content = "Can be Info, links, about..."
+
+[[params.socialIcons]]
+name = "Twitter"
+url = "https://twitter.com/mekaelturner"
+
+[[params.socialIcons]]
+name = "Instagram"
+url = "https://instagram.com/mekaelturner"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON" ]
+

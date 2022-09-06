@@ -1,0 +1,13 @@
+:PROPERTIES:
+:EXPORT_FILE_NAME: search 
+:END:
+#+hugo_custom_front_matter: :layout Search :summary Search :placeholder Search
+#+hugo_base_dir: ../
+#+title: Search
+#+layout: Search
+#+summary: Search
+#+placeholder: Search
+#+date: [2022-04-09]
+#+author: Mekael Turner
+
+Hello

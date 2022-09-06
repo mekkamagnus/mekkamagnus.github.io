@@ -1,0 +1,10 @@
+#+title: Mekael's Dev Blog
+#+include: "header.org"
+
+
+
+** Post
+- [[file:tech_i_m_interested_in.org][Tech I'm Intersted In]] 
+ 
+
+#+include: "footer.org"

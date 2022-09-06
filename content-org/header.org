@@ -1,0 +1,8 @@
+#+begin_export html
+<p>Just post as a way to think through writing.</p>
+<nav>
+  <a href="/">Home</a>
+  <a href="https://github.com/mekkamagnus">Github</a>
+  <a href="https://twitter.com/mekaelturner">Twitter</a>
+</nav>
+#+end_export
