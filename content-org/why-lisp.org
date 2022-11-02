@@ -1,0 +1,10 @@
+:PROPERTIES:
+:EXPORT_FILE_NAME: why-lisp
+:END:
+#+hugo_base_dir: ../
+#+title: why-lisp
+#+filetags: emacs javascript lisp
+#+date: [2022-09-28 Wed]
+#+author: Mekael Turner
+
+
