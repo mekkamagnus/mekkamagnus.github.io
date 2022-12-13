@@ -6,3 +6,11 @@
 #+filetags: zettelkasten emacs org-roam lisp elisp
 #+date: [2022-12-13 Fri]
 #+author: Mekael Turner
+* Introduction 
+* Emacs 
+** Capture Templates
+* Org-Roam
+* Browser
+** Browser Options
+** Capture Templates
+
