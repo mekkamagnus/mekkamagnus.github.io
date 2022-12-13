@@ -1,7 +1,7 @@
 +++
 title = "Why Lisp?"
 author = ["Mekael Turner"]
-date = 2022-09-28T00:00:00+08:00
+date = 2022-11-02T00:00:00+08:00
 tags = ["emacs", "javascript", "lisp"]
 draft = false
 +++

@@ -4,7 +4,7 @@
 #+hugo_base_dir: ../
 #+title: Why Lisp?
 #+filetags: emacs javascript lisp
-#+date: [2022-09-28 Wed]
+#+date: [2022-11-02 Wed]
 #+author: Mekael Turner
 
 * Writing Lisp Code is Easy

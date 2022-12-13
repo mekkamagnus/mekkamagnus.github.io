@@ -1,0 +1,8 @@
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-zettelkasten-workflow.org
+:END:
+#+hugo_base_dir: ../
+#+title: My Zettelkasten Workflow
+#+filetags: zettelkasten emacs org-roam lisp elisp
+#+date: [2022-12-13 Fri]
+#+author: Mekael Turner
