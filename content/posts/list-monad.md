@@ -12,6 +12,8 @@ I'm writing this more as a way to document and organize my thoughts around the l
 
 This is a very important monad.
 
+A map of functional concepts I'm currently studying can be found at [Functional Programming Concepts](/posts/functional-programming/).
+
 
 ## The Code {#the-code}
 

@@ -13,6 +13,8 @@ I'm writing this more as a way to document and organize my thoughts around the l
 
 This is a very important monad.
 
+A map of functional concepts I'm currently studying can be found at [[/posts/functional-programming/][Functional Programming Concepts]]. 
+
 * The Code 
 #+name: list-monad
 #+begin_src js :results output :eval no
