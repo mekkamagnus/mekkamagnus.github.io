@@ -1,0 +1,8 @@
+#+title: Mekeal Dev Blog Readme
+
+* Overview 
+
+- [ ] Hugo
+  - ox-hugo :: used with org-mode
+
+- [ ] Github Actions    

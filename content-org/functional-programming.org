@@ -1,0 +1,14 @@
+:PROPERTIES:
+:EXPORT_FILE_NAME: functional_programming_concepts.org
+:ID:       6F524ABD-2A94-4F3F-BCE2-AA99B7D76F42
+:END:
+#+hugo_base_dir: ../
+#+title: Functional Programming Concepts
+#+filetags: functional_programming javascript lisp elisp
+#+date: [2023-10-07 Sat]
+#+author: Mekael Turner
+* Overview 
+This is essential a map of content for functional programming concepts that I'm learning.
+
+
+
