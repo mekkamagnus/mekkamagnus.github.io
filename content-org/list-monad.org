@@ -1,0 +1,47 @@
+:PROPERTIES:
+:EXPORT_FILE_NAME: functional_programming_concepts.org
+:ID:       EBAB600A-3939-4865-86BB-8A0801C47072
+:END:
+#+hugo_base_dir: ../
+#+title: List Monad in JavaScript
+#+filetags: functional_programming monads javascript 
+#+date: [2023-10-07 Sat]
+#+author: Mekael Turner
+
+* Thoughts 
+I'm writing this more as a way to document and organize my thoughts around the list monad.
+
+This is a very important monad.
+
+* The Code 
+#+name: list-monad
+#+begin_src js :results output :eval no
+  export const List = list => ({
+    list,
+    map: fn => List(list.map(fn)),
+    fold: (fn, initialValue) => List(list.reduce(fn, initialValue)),
+    foldMap(monoid, empty) {
+      const mappedList = list.reduce(fn, initialValue);
+      const result = mappedList.reduce(
+	(accumalator, monoidValue) => accumalator.concat(monoidValue),
+	empty,
+      );
+      return List(result);
+    },
+    extract: () => list,
+  });
+#+end_src
+
+
+** Example
+Here is a sample implementation of this list monad.
+#+begin_src js :results output :eval no :noweb yes
+  List([1, 2, 3, 4]).map(x => x + 1)
+  //> [2,3,4,5]
+
+  List(["red", "Blue", "Yellow", "Green"]).(str => str.toUpperCase())
+  //> ["RED", "BLUE", "YELLOW", "GREEN"]
+#+end_src
+
+** Github 
+A current version of my implementation of this list monad can be found [[https://github.com/mekkamagnus/functional-library-javascript/blob/main/list.js][here]].
