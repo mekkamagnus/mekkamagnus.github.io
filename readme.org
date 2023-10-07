@@ -5,4 +5,20 @@
 - [ ] Hugo
   - ox-hugo :: used with org-mode
 
+- [ ] Easy Publish  
+  - [ ] Document Publishing Workflow
+    - org-hugo
+      https://ox-hugo.scripter.co/doc/usage/
+
+      Must happen while in the file
+
+      - org-hugo-auto-export-mode or
+      - org-hugo-export-to-md
+      - org-hugo-export-wim-to-md
+    - preview in Hugo dev server
+      #+begin_src bash :eval no
+	hugo server --buildDrafts navigateToChanged
+      #+end_src
+
+
 - [ ] Github Actions    
