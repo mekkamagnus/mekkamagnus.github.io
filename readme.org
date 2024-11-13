@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       6DA7EDCE-FD6A-491A-AEB1-99F4DEFFC960
+:END:
 #+title: Mekeal Dev Blog Readme
 
 * Overview 

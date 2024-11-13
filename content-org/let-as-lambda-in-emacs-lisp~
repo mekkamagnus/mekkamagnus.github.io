@@ -1,0 +1,99 @@
+
+* The Lambda Calculus expessed with Emacs Lisp
+[2024-11-12 Tue 17:44]
+From: [[file:~/Library/CloudStorage/OneDrive-Personal/org/2024-11-12.org::*Current Page Export Function][Current Page Export Function]]
+
+A function primitive as a =let= expression
+#+begin_src emacs-lisp
+  (let ((x 20))
+    (+ x 3))
+#+end_src
+
+#+RESULTS:
+: 23
+
+A function as a =lambda= expression
+#+begin_src emacs-lisp
+  ((lambda (x) (+ x 3)) 20)
+#+end_src
+
+#+RESULTS:
+: 23
+  - The result is pass at the end similar to how it happens in The Lambda Calculus
+
+A =lambda= function being passed to a =let= function    
+#+begin_src emacs-lisp
+  (let ((x (+ 21 (* 2 3)))) 		; x = 27
+    ((lambda (y) y) x)) 		; y = x; return y
+#+end_src
+
+#+RESULTS:
+: 27
+the above =let= expression translates to...
+#+begin_src emacs-lisp
+  ((lambda (x)				; lambda defined
+     ((lambda (y) y) x) )		; the argument x is passed to the internal lambda
+					; y is returned 
+   (+ 21 (* 2 4)))			; "27" is passed to the lambda above
+#+end_src
+
+#+RESULTS:
+: 29
+
+
+** let* expressed with Lambdas
+#+begin_src emacs-lisp
+  (let* ((x 20)
+	 (y x)
+	 )
+    x)
+#+end_src
+
+translates to...
+
+#+begin_src emacs-lisp
+  ((lambda (x)
+     ((lambda (y) x) x)) 20)
+  
+
+#+end_src
+
+This code defines a nested lambda function.
+
+- The outer lambda =(lambda (x) ...)= takes an argument =x= (which is 20 in this case).
+- Inside, it defines another lambda =(lambda (y) x)= that takes an argument =y= but *ignores it* and returns =x=.
+- The outer lambda then immediately calls the inner lambda, passing =x= as the argument.
+
+Therefore, the code evaluates to =20= because:
+
+1. The outer lambda receives =20= as =x=.
+2. It calls the inner lambda, passing =20= for =y=.
+3. The inner lambda ignores =y= and returns =x=, which is =20=. 
+
+*** What is the above code exemplifying?  
+
+The code exemplifies how =let*= works by showing its equivalent using nested lambda functions. =let*= allows sequential binding of variables, where each subsequent variable can refer to previously defined variables.  
+
+Here's how the lambda implementation mirrors this:
+
+- The outer lambda represents the =let*= binding for =x=. It takes the value =20= and passes it to the inner lambda.
+- The inner lambda represents the =let*= binding for =y=. It takes the value passed from the outer lambda, representing =x=, and binds it to =y=. It then simply returns the value of =x=, demonstrating that the inner lambda's binding of =y= has no effect on the result.
+
+The code highlights that =let*= can be thought of as creating nested scopes, where each variable is bound within a scope defined by the preceding variables. 
+
+*** What relationship does this have with currying?
+
+The code demonstrates a functional programming concept called *currying*, although not explicitly. 
+
+*Currying* is the technique of transforming a function that takes multiple arguments into a series of functions, each taking a single argument.  
+
+The nested lambdas we see /mimic/ currying in a sense:
+
+- The outer lambda takes a single argument =x=. 
+- It then returns a function (the inner lambda) that takes another single argument =y=. 
+
+While this doesn't strictly follow the definition of currying (since the inner function doesn't directly use the value of =x= in the example), it shows how we can achieve a similar effect of binding variables one at a time.
+
+In essence, currying allows us to build up functions incrementally, taking one argument at a time, creating a more modular and composable style of programming.
+
+However, this example primarily focuses on illustrating how =let/= works, and it doesn't fully leverage the power of currying, which is often used for partial application and function composition.
