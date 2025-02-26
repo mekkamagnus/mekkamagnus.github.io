@@ -1,5 +1,6 @@
 :properties:
 :EXPORT_FILE_NAME: expressing-lambda-calculus-in-emacs-lisp
+:ID:       750A295A-4B71-4024-963F-B2D62B9F1BA3
 :END:
 #+hugo_base_dir: ../
 #+title: Expressing Lambda Calculus in Emacs Lisp
