@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lisp on Mekael Turner Dev Blog</title>
+    <link>http://localhost:1313/tags/lisp/</link>
+    <description>Recent content in Lisp on Mekael Turner Dev Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Oct 2023 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Functional Programming Concepts</title>
+      <link>http://localhost:1313/posts/functional-programming/</link>
+      <pubDate>Sat, 07 Oct 2023 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/functional-programming/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This is essential a map of content for functional programming concepts that I&amp;rsquo;m learning.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/posts/list-monad/&#34;&gt;List Monad&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>My Zettelkasten Workflow</title>
+      <link>http://localhost:1313/posts/my-zettelkasten-workflow/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/my-zettelkasten-workflow/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;h2 id=&#34;emacs&#34;&gt;Emacs&lt;/h2&gt;
+&lt;h3 id=&#34;capture-templates&#34;&gt;Capture Templates&lt;/h3&gt;
+&lt;h2 id=&#34;org-roam&#34;&gt;Org-Roam&lt;/h2&gt;
+&lt;h2 id=&#34;browser&#34;&gt;Browser&lt;/h2&gt;
+&lt;h3 id=&#34;browser-options&#34;&gt;Browser Options&lt;/h3&gt;
+&lt;h3 id=&#34;capture-templates&#34;&gt;Capture Templates&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>Why Lisp?</title>
+      <link>http://localhost:1313/posts/why-lisp/</link>
+      <pubDate>Wed, 02 Nov 2022 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/why-lisp/</guid>
+      <description>&lt;h2 id=&#34;writing-lisp-code-is-easy&#34;&gt;Writing Lisp Code is Easy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;However good Lisp programming is hard according to Richard P. Gabriel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lisp-is-extremely-hackable&#34;&gt;Lisp is extremely hackable&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;It&amp;rsquo;s easy to create a Lisp Language&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s Easy to Make a Lisp Language Domain Specific&lt;/li&gt;
+&lt;li&gt;Writing a parser and compiler for Lisp is way claner than other languages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;emacs-is-configured-with-lisp&#34;&gt;Emacs is configured with Lisp&lt;/h2&gt;
+&lt;h2 id=&#34;lisp-helps-me-with-my-programmatic-thinking&#34;&gt;Lisp Helps Me with My Programmatic Thinking&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Once you know Lisp you think of programming in a very different way.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lisp-has-heavy-ties-to-functional-programming&#34;&gt;Lisp has heavy ties to Functional Programming&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;My interested in mathematics has motivated my interest in functional programming.&lt;/li&gt;
+&lt;li&gt;A lot of functional programming ideas implemented in other programming languages started in Lisp.&lt;/li&gt;
+&lt;li&gt;A lot of academic computer science work uses Lisp.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;common-lisp-s-object-oriented-system-is-great&#34;&gt;Common Lisp&amp;rsquo;s Object-Oriented System is Great&lt;/h2&gt;
+&lt;h2 id=&#34;development-of-programs-in-lisp-advance-faster-then-in-other-languages&#34;&gt;Development of programs in Lisp advance faster then in other languages&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Its easy to build a prototype of an idea in Lisp.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tech I&#39;m Intersted In</title>
+      <link>http://localhost:1313/posts/tech_i_m_interested_in/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/tech_i_m_interested_in/</guid>
+      <description>&lt;h2 id=&#34;focus-on-the-fundamentals&#34;&gt;Focus on the Fundamentals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;In all of my learning of programming and computer science I would like to keep a focus on having strong fundamentals. This desire to have strong fundamentals is what informs my decisions on what to learn and in what order.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;languages&#34;&gt;Languages&lt;/h2&gt;
+&lt;h3 id=&#34;javascript&#34;&gt;JavaScript&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Many sources online say you should take either JavaScript or Python as your first language.&lt;/li&gt;
+&lt;li&gt;I like that JavaScript has more of a closeness to C-syntax since C is a high priority on my list of languages to learn.&lt;/li&gt;
+&lt;li&gt;With JavaScript I can build and interact with the full stack of web development. I can work from browser to server. This means the skills I learn can be applied to more places.&lt;/li&gt;
+&lt;li&gt;JavaScript is thought of having a closeness to Lisp. So this also feeds in to my desire to learn Lisp.&lt;/li&gt;
+&lt;li&gt;In learning JavaScript I believe it will be easy to crossover into Python. But I don&amp;rsquo;t think it would be as easy the other way around.  In the end, Python being a very important language, I will still get to learning it at some point no matter what.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s important to really grokk one language. Then it will be easier to pick up the rest because I will actually understand the core principles of programming.
+&lt;ul&gt;
+&lt;li&gt;Sort of like mastering one key in song writing. Then later it will be easy to pick up the rest of the keys.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;JavaScript works in the browser which means that I can build little applications that can run in browser. No need to download anything.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;lisp-elisp&#34;&gt;Lisp/Elisp&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;I learned lisp because of reading that it will help you to be a better programming. However they also say it shouldn&amp;rsquo;t be your first language.&lt;/li&gt;
+&lt;li&gt;As a result of learning lisp I was lead towards Emacs&lt;/li&gt;
+&lt;li&gt;Emacs I believe also helps me to be a better programmer
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;All of the greatest engineers in the world use emacs&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

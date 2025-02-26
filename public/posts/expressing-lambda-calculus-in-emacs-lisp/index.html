@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Expressing Lambda Calculus in Emacs Lisp | Mekael Turner Dev Blog</title>
+<meta name="keywords" content="functional-programming, monoid, javascript, the-lambda-calculus">
+<meta name="description" content="The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.
+In this article, we&rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.">
+<meta name="author" content="Mekael Turner">
+<link rel="canonical" href="http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/">
+  <meta property="og:site_name" content="Mekael Turner Dev Blog">
+  <meta property="og:title" content="Expressing Lambda Calculus in Emacs Lisp">
+  <meta property="og:description" content="The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.
+In this article, we’ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-12T00:00:00+08:00">
+    <meta property="article:modified_time" content="2024-11-12T00:00:00+08:00">
+    <meta property="article:tag" content="Functional-Programming">
+    <meta property="article:tag" content="Monoid">
+    <meta property="article:tag" content="Javascript">
+    <meta property="article:tag" content="The-Lambda-Calculus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Expressing Lambda Calculus in Emacs Lisp">
+<meta name="twitter:description" content="The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.
+In this article, we&rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Expressing Lambda Calculus in Emacs Lisp",
+      "item": "http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Expressing Lambda Calculus in Emacs Lisp",
+  "name": "Expressing Lambda Calculus in Emacs Lisp",
+  "description": "The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.\nIn this article, we\u0026rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.\n",
+  "keywords": [
+    "functional-programming", "monoid", "javascript", "the-lambda-calculus"
+  ],
+  "articleBody": "The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.\nIn this article, we’ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.\nFunctions as Lambda Expressions Let’s begin by considering a simple function that adds 3 to a given number:\n(let ((x 20)) (+ x 3)) This code defines a function using the let construct, binding the variable x to the value 20 and then performing the addition. We can rewrite this using a lambda expression, a core construct of the lambda calculus:\n((lambda (x) (+ x 3)) 20) Here, we define a lambda function (lambda (x) (+ x 3)), which takes a single argument x and returns the result of adding 3 to it. The argument 20 is then passed to this function, yielding the same result as the previous let expression.\nNested Lambdas: Simulating let* The let* construct in Emacs Lisp allows for sequential binding of variables, where each subsequent variable can refer to previously defined ones. Let’s consider an example:\n(let* ((x 20) (y x) ) x) This code first binds x to 20 and then binds y to the value of x. It then returns the value of x. We can mimic this behavior with nested lambda functions:\n((lambda (x) ((lambda (y) x) x)) 20) The outer lambda binds x to 20. The inner lambda binds y to the value of x but ultimately returns the value of x, demonstrating that the binding of y doesn’t affect the result.\nCurrying: A Functional Approach The nested lambda functions used above hint at a core concept in functional programming: currying. Currying transforms a function that takes multiple arguments into a series of functions, each taking a single argument. While not strictly currying, the nested lambda functions in the previous example illustrate a similar approach.\nThe outer lambda takes the first argument (x) and then returns the inner lambda, which takes the second argument (y). While the inner lambda in this example ignores the value of y, currying allows us to build up functions incrementally, one argument at a time.\nConclusion Exploring the lambda calculus within Emacs Lisp provides valuable insights into the functional programming paradigm. By understanding how lambda expressions work and how they can be used to express concepts like let*, we gain a deeper understanding of the power and elegance of functional programming. As you continue your journey through the world of functional programming, remember that the lambda calculus is a potent tool, offering a unique and powerful way to represent and manipulate functions.\n",
+  "wordCount" : "472",
+  "inLanguage": "en",
+  "datePublished": "2024-11-12T00:00:00+08:00",
+  "dateModified": "2024-11-12T00:00:00+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Mekael Turner"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mekael Turner Dev Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Mekael Turner Dev Blog (Alt + H)">Mekael Turner Dev Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Expressing Lambda Calculus in Emacs Lisp
+    </h1>
+    <div class="post-meta"><span title='2024-11-12 00:00:00 +0800 CST'>November 12, 2024</span>&nbsp;·&nbsp;Mekael Turner
+
+</div>
+  </header> 
+  <div class="post-content"><p>The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.</p>
+<p>In this article, we&rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.</p>
+<h2 id="functions-as-lambda-expressions">Functions as Lambda Expressions<a hidden class="anchor" aria-hidden="true" href="#functions-as-lambda-expressions">#</a></h2>
+<p>Let&rsquo;s begin by considering a simple function that adds 3 to a given number:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(let ((x <span style="color:#ae81ff">20</span>))
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">3</span>))
+</span></span></code></pre></div><p>This code defines a function using the <code>let</code> construct, binding the variable <code>x</code> to the value 20 and then performing the addition. We can rewrite this using a lambda expression, a core construct of the lambda calculus:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>((lambda (x) (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">3</span>)) <span style="color:#ae81ff">20</span>)
+</span></span></code></pre></div><p>Here, we define a lambda function <code>(lambda (x) (+ x 3))</code>, which takes a single argument <code>x</code> and returns the result of adding 3 to it. The argument <code>20</code> is then passed to this function, yielding the same result as the previous <code>let</code> expression.</p>
+<h2 id="nested-lambdas-simulating-let">Nested Lambdas: Simulating <code>let*</code><a hidden class="anchor" aria-hidden="true" href="#nested-lambdas-simulating-let">#</a></h2>
+<p>The <code>let*</code> construct in Emacs Lisp allows for sequential binding of variables, where each subsequent variable can refer to previously defined ones. Let&rsquo;s consider an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(let* ((x <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>         (y x)
+</span></span><span style="display:flex;"><span>         )
+</span></span><span style="display:flex;"><span>    x)
+</span></span></code></pre></div><p>This code first binds <code>x</code> to 20 and then binds <code>y</code> to the value of <code>x</code>. It then returns the value of <code>x</code>. We can mimic this behavior with nested lambda functions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>((lambda (x)
+</span></span><span style="display:flex;"><span>     ((lambda (y) x) x)) <span style="color:#ae81ff">20</span>)
+</span></span></code></pre></div><p>The outer lambda binds <code>x</code> to 20. The inner lambda binds <code>y</code> to the value of <code>x</code> but ultimately returns the value of <code>x</code>, demonstrating that the binding of <code>y</code> doesn&rsquo;t affect the result.</p>
+<h2 id="currying-a-functional-approach">Currying: A Functional Approach<a hidden class="anchor" aria-hidden="true" href="#currying-a-functional-approach">#</a></h2>
+<p>The nested lambda functions used above hint at a core concept in functional programming: <em>currying</em>. Currying transforms a function that takes multiple arguments into a series of functions, each taking a single argument. While not strictly currying, the nested lambda functions in the previous example illustrate a similar approach.</p>
+<p>The outer lambda takes the first argument (<code>x</code>) and then returns the inner lambda, which takes the second argument (<code>y</code>). While the inner lambda in this example ignores the value of <code>y</code>, currying allows us to build up functions incrementally, one argument at a time.</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Exploring the lambda calculus within Emacs Lisp provides valuable insights into the functional programming paradigm. By understanding how lambda expressions work and how they can be used to express concepts like <code>let*</code>, we gain a deeper understanding of the power and elegance of functional programming. As you continue your journey through the world of functional programming, remember that the lambda calculus is a potent tool, offering a unique and powerful way to represent and manipulate functions.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/functional-programming/">Functional-Programming</a></li>
+      <li><a href="http://localhost:1313/tags/monoid/">Monoid</a></li>
+      <li><a href="http://localhost:1313/tags/javascript/">Javascript</a></li>
+      <li><a href="http://localhost:1313/tags/the-lambda-calculus/">The-Lambda-Calculus</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Mekael Turner Dev Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

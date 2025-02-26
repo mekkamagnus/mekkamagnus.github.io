@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>The Endo Monoid | Mekael Turner Dev Blog</title>
+<meta name="keywords" content="functional-programming, monoid, javascript">
+<meta name="description" content="Overview
+Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.
+The value is fed into Endo&rsquo;s run function providing opportunities for lazy operations.
+I&rsquo;m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations.
+## Examples
+Example 1
+// Endo monoid declaration
+// Endo :: (a -&gt; a) -&gt; Endo a
+const Endo = run =&gt; ({
+    run,
+    // concat :: Endo a -&gt; Endo a -&gt; Endo a
+    concat: other =&gt;
+    Endo(x =&gt; run(other.run(x)))
+})
+
+// Endo.empty :: () -&gt; Endo a
+Endo.empty = () =&gt; Endo(x =&gt; x)
+
+// List monad for putting functions into a list.
+// List :: [a] -&gt; List a
+const List = list =&gt; ({
+    list,
+
+    // map :: (a -&gt; b) -&gt; List a -&gt; List b
+    map: fn =&gt; List(list.map(fn)),
+
+    // fold :: ((b, a) -&gt; b, b) -&gt; List a -&gt; List b
+    fold: (fn, initialValue) =&gt; List(list.reduce(fn, initialValue)),
+
+    // foldMap :: (a -&gt; b) -&gt; b -&gt; List a -&gt; b
+    foldMap: (monoid, empty) =&gt; {
+        return empty != null
+            ? list.reduce((acc, x, i) =&gt; acc.concat(monoid(x, i)), empty)
+            : list.map(monoid).reduce((acc, x) =&gt; acc.concat(x))      },
+
+    // extract :: () -&gt; [a]
+    extract: () =&gt; list,
+})
+
+// Utility functions
+
+// compose :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+const compose = f =&gt; g =&gt; x =&gt; f(g(x))
+
+// curry :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c
+const curry = f =&gt; a =&gt; b =&gt; f(a, b)
+
+// toUpper :: String -&gt; String
+const toUpper = str =&gt; str.toUpperCase()
+
+// exclaim :: String -&gt; String
+const exclaim = str =&gt; `${str}!!`
+
+// to OrgHeader :: String -&gt; String
+const toOrgHeader = str =&gt; `* ${str}`
+
+// toOrgTagList :: [String] -&gt; String
+const toOrgTagList = xs =&gt; List(xs)
+      .map((tag, index) =&gt; !index ? `:${tag}:` : `${tag}:` )
+      .fold((accumalator,tag, index) =&gt; accumalator.concat(tag) ,&#39;&#39;)
+      .extract()
+
+// Tag list for header
+const tags = [&#39;javascript&#39;, &#39;completed&#39;, &#39;moved&#39;]
+
+// addTagsToHeader :: [String] -&gt; String -&gt; String
+const addTagsToHeader =
+      curry((tagList,str) =&gt; `${str} ${tagList}`)
+
+console.log(addTagsToHeader(toOrgTagList(tags))(&#34;A Header&#34;))
+
+const result = List([addTagsToHeader(toOrgTagList(tags)),toOrgHeader, toUpper, exclaim]).foldMap(Endo, Endo.empty(&#39;&#39;)).run(&#39;hello&#39;)
+//&gt; A Header :javascript:completed:moved:
+
+console.log(result)
+//&gt; HELLO!! :javascript:completed:moved:
+">
+<meta name="author" content="Mekael Turner">
+<link rel="canonical" href="http://localhost:1313/posts/endo-monoid/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/endo-monoid/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/posts/endo-monoid/">
+  <meta property="og:site_name" content="Mekael Turner Dev Blog">
+  <meta property="og:title" content="The Endo Monoid">
+  <meta property="og:description" content="Overview Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.
+The value is fed into Endo’s run function providing opportunities for lazy operations.
+I’m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations. ## Examples
+Example 1 // Endo monoid declaration // Endo :: (a -&gt; a) -&gt; Endo a const Endo = run =&gt; ({ run, // concat :: Endo a -&gt; Endo a -&gt; Endo a concat: other =&gt; Endo(x =&gt; run(other.run(x))) }) // Endo.empty :: () -&gt; Endo a Endo.empty = () =&gt; Endo(x =&gt; x) // List monad for putting functions into a list. // List :: [a] -&gt; List a const List = list =&gt; ({ list, // map :: (a -&gt; b) -&gt; List a -&gt; List b map: fn =&gt; List(list.map(fn)), // fold :: ((b, a) -&gt; b, b) -&gt; List a -&gt; List b fold: (fn, initialValue) =&gt; List(list.reduce(fn, initialValue)), // foldMap :: (a -&gt; b) -&gt; b -&gt; List a -&gt; b foldMap: (monoid, empty) =&gt; { return empty != null ? list.reduce((acc, x, i) =&gt; acc.concat(monoid(x, i)), empty) : list.map(monoid).reduce((acc, x) =&gt; acc.concat(x)) }, // extract :: () -&gt; [a] extract: () =&gt; list, }) // Utility functions // compose :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c const compose = f =&gt; g =&gt; x =&gt; f(g(x)) // curry :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c const curry = f =&gt; a =&gt; b =&gt; f(a, b) // toUpper :: String -&gt; String const toUpper = str =&gt; str.toUpperCase() // exclaim :: String -&gt; String const exclaim = str =&gt; `${str}!!` // to OrgHeader :: String -&gt; String const toOrgHeader = str =&gt; `* ${str}` // toOrgTagList :: [String] -&gt; String const toOrgTagList = xs =&gt; List(xs) .map((tag, index) =&gt; !index ? `:${tag}:` : `${tag}:` ) .fold((accumalator,tag, index) =&gt; accumalator.concat(tag) ,&#39;&#39;) .extract() // Tag list for header const tags = [&#39;javascript&#39;, &#39;completed&#39;, &#39;moved&#39;] // addTagsToHeader :: [String] -&gt; String -&gt; String const addTagsToHeader = curry((tagList,str) =&gt; `${str} ${tagList}`) console.log(addTagsToHeader(toOrgTagList(tags))(&#34;A Header&#34;)) const result = List([addTagsToHeader(toOrgTagList(tags)),toOrgHeader, toUpper, exclaim]).foldMap(Endo, Endo.empty(&#39;&#39;)).run(&#39;hello&#39;) //&gt; A Header :javascript:completed:moved: console.log(result) //&gt; HELLO!! :javascript:completed:moved: ">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-10-08T00:00:00+08:00">
+    <meta property="article:modified_time" content="2023-10-08T00:00:00+08:00">
+    <meta property="article:tag" content="Functional-Programming">
+    <meta property="article:tag" content="Monoid">
+    <meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Endo Monoid">
+<meta name="twitter:description" content="Overview
+Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.
+The value is fed into Endo&rsquo;s run function providing opportunities for lazy operations.
+I&rsquo;m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations.
+## Examples
+Example 1
+// Endo monoid declaration
+// Endo :: (a -&gt; a) -&gt; Endo a
+const Endo = run =&gt; ({
+    run,
+    // concat :: Endo a -&gt; Endo a -&gt; Endo a
+    concat: other =&gt;
+    Endo(x =&gt; run(other.run(x)))
+})
+
+// Endo.empty :: () -&gt; Endo a
+Endo.empty = () =&gt; Endo(x =&gt; x)
+
+// List monad for putting functions into a list.
+// List :: [a] -&gt; List a
+const List = list =&gt; ({
+    list,
+
+    // map :: (a -&gt; b) -&gt; List a -&gt; List b
+    map: fn =&gt; List(list.map(fn)),
+
+    // fold :: ((b, a) -&gt; b, b) -&gt; List a -&gt; List b
+    fold: (fn, initialValue) =&gt; List(list.reduce(fn, initialValue)),
+
+    // foldMap :: (a -&gt; b) -&gt; b -&gt; List a -&gt; b
+    foldMap: (monoid, empty) =&gt; {
+        return empty != null
+            ? list.reduce((acc, x, i) =&gt; acc.concat(monoid(x, i)), empty)
+            : list.map(monoid).reduce((acc, x) =&gt; acc.concat(x))      },
+
+    // extract :: () -&gt; [a]
+    extract: () =&gt; list,
+})
+
+// Utility functions
+
+// compose :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+const compose = f =&gt; g =&gt; x =&gt; f(g(x))
+
+// curry :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c
+const curry = f =&gt; a =&gt; b =&gt; f(a, b)
+
+// toUpper :: String -&gt; String
+const toUpper = str =&gt; str.toUpperCase()
+
+// exclaim :: String -&gt; String
+const exclaim = str =&gt; `${str}!!`
+
+// to OrgHeader :: String -&gt; String
+const toOrgHeader = str =&gt; `* ${str}`
+
+// toOrgTagList :: [String] -&gt; String
+const toOrgTagList = xs =&gt; List(xs)
+      .map((tag, index) =&gt; !index ? `:${tag}:` : `${tag}:` )
+      .fold((accumalator,tag, index) =&gt; accumalator.concat(tag) ,&#39;&#39;)
+      .extract()
+
+// Tag list for header
+const tags = [&#39;javascript&#39;, &#39;completed&#39;, &#39;moved&#39;]
+
+// addTagsToHeader :: [String] -&gt; String -&gt; String
+const addTagsToHeader =
+      curry((tagList,str) =&gt; `${str} ${tagList}`)
+
+console.log(addTagsToHeader(toOrgTagList(tags))(&#34;A Header&#34;))
+
+const result = List([addTagsToHeader(toOrgTagList(tags)),toOrgHeader, toUpper, exclaim]).foldMap(Endo, Endo.empty(&#39;&#39;)).run(&#39;hello&#39;)
+//&gt; A Header :javascript:completed:moved:
+
+console.log(result)
+//&gt; HELLO!! :javascript:completed:moved:
+">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "The Endo Monoid",
+      "item": "http://localhost:1313/posts/endo-monoid/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Endo Monoid",
+  "name": "The Endo Monoid",
+  "description": "Overview Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.\nThe value is fed into Endo\u0026rsquo;s run function providing opportunities for lazy operations.\nI\u0026rsquo;m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations. ## Examples\nExample 1 // Endo monoid declaration // Endo :: (a -\u0026gt; a) -\u0026gt; Endo a const Endo = run =\u0026gt; ({ run, // concat :: Endo a -\u0026gt; Endo a -\u0026gt; Endo a concat: other =\u0026gt; Endo(x =\u0026gt; run(other.run(x))) }) // Endo.empty :: () -\u0026gt; Endo a Endo.empty = () =\u0026gt; Endo(x =\u0026gt; x) // List monad for putting functions into a list. // List :: [a] -\u0026gt; List a const List = list =\u0026gt; ({ list, // map :: (a -\u0026gt; b) -\u0026gt; List a -\u0026gt; List b map: fn =\u0026gt; List(list.map(fn)), // fold :: ((b, a) -\u0026gt; b, b) -\u0026gt; List a -\u0026gt; List b fold: (fn, initialValue) =\u0026gt; List(list.reduce(fn, initialValue)), // foldMap :: (a -\u0026gt; b) -\u0026gt; b -\u0026gt; List a -\u0026gt; b foldMap: (monoid, empty) =\u0026gt; { return empty != null ? list.reduce((acc, x, i) =\u0026gt; acc.concat(monoid(x, i)), empty) : list.map(monoid).reduce((acc, x) =\u0026gt; acc.concat(x)) }, // extract :: () -\u0026gt; [a] extract: () =\u0026gt; list, }) // Utility functions // compose :: (b -\u0026gt; c) -\u0026gt; (a -\u0026gt; b) -\u0026gt; a -\u0026gt; c const compose = f =\u0026gt; g =\u0026gt; x =\u0026gt; f(g(x)) // curry :: ((a, b) -\u0026gt; c) -\u0026gt; a -\u0026gt; b -\u0026gt; c const curry = f =\u0026gt; a =\u0026gt; b =\u0026gt; f(a, b) // toUpper :: String -\u0026gt; String const toUpper = str =\u0026gt; str.toUpperCase() // exclaim :: String -\u0026gt; String const exclaim = str =\u0026gt; `${str}!!` // to OrgHeader :: String -\u0026gt; String const toOrgHeader = str =\u0026gt; `* ${str}` // toOrgTagList :: [String] -\u0026gt; String const toOrgTagList = xs =\u0026gt; List(xs) .map((tag, index) =\u0026gt; !index ? `:${tag}:` : `${tag}:` ) .fold((accumalator,tag, index) =\u0026gt; accumalator.concat(tag) ,\u0026#39;\u0026#39;) .extract() // Tag list for header const tags = [\u0026#39;javascript\u0026#39;, \u0026#39;completed\u0026#39;, \u0026#39;moved\u0026#39;] // addTagsToHeader :: [String] -\u0026gt; String -\u0026gt; String const addTagsToHeader = curry((tagList,str) =\u0026gt; `${str} ${tagList}`) console.log(addTagsToHeader(toOrgTagList(tags))(\u0026#34;A Header\u0026#34;)) const result = List([addTagsToHeader(toOrgTagList(tags)),toOrgHeader, toUpper, exclaim]).foldMap(Endo, Endo.empty(\u0026#39;\u0026#39;)).run(\u0026#39;hello\u0026#39;) //\u0026gt; A Header :javascript:completed:moved: console.log(result) //\u0026gt; HELLO!! :javascript:completed:moved: ",
+  "keywords": [
+    "functional-programming", "monoid", "javascript"
+  ],
+  "articleBody": "Overview Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.\nThe value is fed into Endo’s run function providing opportunities for lazy operations.\nI’m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations. ## Examples\nExample 1 // Endo monoid declaration // Endo :: (a -\u003e a) -\u003e Endo a const Endo = run =\u003e ({ run, // concat :: Endo a -\u003e Endo a -\u003e Endo a concat: other =\u003e Endo(x =\u003e run(other.run(x))) }) // Endo.empty :: () -\u003e Endo a Endo.empty = () =\u003e Endo(x =\u003e x) // List monad for putting functions into a list. // List :: [a] -\u003e List a const List = list =\u003e ({ list, // map :: (a -\u003e b) -\u003e List a -\u003e List b map: fn =\u003e List(list.map(fn)), // fold :: ((b, a) -\u003e b, b) -\u003e List a -\u003e List b fold: (fn, initialValue) =\u003e List(list.reduce(fn, initialValue)), // foldMap :: (a -\u003e b) -\u003e b -\u003e List a -\u003e b foldMap: (monoid, empty) =\u003e { return empty != null ? list.reduce((acc, x, i) =\u003e acc.concat(monoid(x, i)), empty) : list.map(monoid).reduce((acc, x) =\u003e acc.concat(x)) }, // extract :: () -\u003e [a] extract: () =\u003e list, }) // Utility functions // compose :: (b -\u003e c) -\u003e (a -\u003e b) -\u003e a -\u003e c const compose = f =\u003e g =\u003e x =\u003e f(g(x)) // curry :: ((a, b) -\u003e c) -\u003e a -\u003e b -\u003e c const curry = f =\u003e a =\u003e b =\u003e f(a, b) // toUpper :: String -\u003e String const toUpper = str =\u003e str.toUpperCase() // exclaim :: String -\u003e String const exclaim = str =\u003e `${str}!!` // to OrgHeader :: String -\u003e String const toOrgHeader = str =\u003e `* ${str}` // toOrgTagList :: [String] -\u003e String const toOrgTagList = xs =\u003e List(xs) .map((tag, index) =\u003e !index ? `:${tag}:` : `${tag}:` ) .fold((accumalator,tag, index) =\u003e accumalator.concat(tag) ,'') .extract() // Tag list for header const tags = ['javascript', 'completed', 'moved'] // addTagsToHeader :: [String] -\u003e String -\u003e String const addTagsToHeader = curry((tagList,str) =\u003e `${str} ${tagList}`) console.log(addTagsToHeader(toOrgTagList(tags))(\"A Header\")) const result = List([addTagsToHeader(toOrgTagList(tags)),toOrgHeader, toUpper, exclaim]).foldMap(Endo, Endo.empty('')).run('hello') //\u003e A Header :javascript:completed:moved: console.log(result) //\u003e HELLO!! :javascript:completed:moved: ",
+  "wordCount" : "378",
+  "inLanguage": "en",
+  "datePublished": "2023-10-08T00:00:00+08:00",
+  "dateModified": "2023-10-08T00:00:00+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Mekael Turner"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/endo-monoid/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mekael Turner Dev Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Mekael Turner Dev Blog (Alt + H)">Mekael Turner Dev Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      The Endo Monoid
+    </h1>
+    <div class="post-meta"><span title='2023-10-08 00:00:00 +0800 CST'>October 8, 2023</span>&nbsp;·&nbsp;Mekael Turner
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="overview">Overview<a hidden class="anchor" aria-hidden="true" href="#overview">#</a></h2>
+<p>Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.</p>
+<p>The value is fed into Endo&rsquo;s run function providing opportunities for lazy operations.</p>
+<p>I&rsquo;m purposely being extremely explicit because I make to make sure that I understand each step of these functional implementations.
+## Examples</p>
+<h4 id="example-1">Example 1<a hidden class="anchor" aria-hidden="true" href="#example-1">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Endo monoid declaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Endo :: (a -&gt; a) -&gt; Endo a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Endo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">run</span> =&gt; ({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">run</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// concat :: Endo a -&gt; Endo a -&gt; Endo a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">concat</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">other</span> =&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">other</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">x</span>)))
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Endo.empty :: () -&gt; Endo a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">Endo</span>.<span style="color:#a6e22e">empty</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#a6e22e">Endo</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// List monad for putting functions into a list.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// List :: [a] -&gt; List a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">List</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span> =&gt; ({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">list</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// map :: (a -&gt; b) -&gt; List a -&gt; List b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">map</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">fn</span> =&gt; <span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">fn</span>)),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// fold :: ((b, a) -&gt; b, b) -&gt; List a -&gt; List b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fold</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">fn</span>, <span style="color:#a6e22e">initialValue</span>) =&gt; <span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">reduce</span>(<span style="color:#a6e22e">fn</span>, <span style="color:#a6e22e">initialValue</span>)),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// foldMap :: (a -&gt; b) -&gt; b -&gt; List a -&gt; b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">foldMap</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">monoid</span>, <span style="color:#a6e22e">empty</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">empty</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">?</span> <span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">acc</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">i</span>) =&gt; <span style="color:#a6e22e">acc</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">monoid</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">i</span>)), <span style="color:#a6e22e">empty</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">:</span> <span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">monoid</span>).<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">acc</span>, <span style="color:#a6e22e">x</span>) =&gt; <span style="color:#a6e22e">acc</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">x</span>))      },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// extract :: () -&gt; [a]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">extract</span><span style="color:#f92672">:</span> () =&gt; <span style="color:#a6e22e">list</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Utility functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// compose :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">compose</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span> =&gt; <span style="color:#a6e22e">g</span> =&gt; <span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">g</span>(<span style="color:#a6e22e">x</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// curry :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">curry</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">f</span> =&gt; <span style="color:#a6e22e">a</span> =&gt; <span style="color:#a6e22e">b</span> =&gt; <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// toUpper :: String -&gt; String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toUpper</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span> =&gt; <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">toUpperCase</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// exclaim :: String -&gt; String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exclaim</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span> =&gt; <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">}</span><span style="color:#e6db74">!!`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// to OrgHeader :: String -&gt; String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toOrgHeader</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span> =&gt; <span style="color:#e6db74">`* </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// toOrgTagList :: [String] -&gt; String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toOrgTagList</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">xs</span> =&gt; <span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">xs</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">tag</span>, <span style="color:#a6e22e">index</span>) =&gt; <span style="color:#f92672">!</span><span style="color:#a6e22e">index</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">`:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tag</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:`</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tag</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:`</span> )
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">fold</span>((<span style="color:#a6e22e">accumalator</span>,<span style="color:#a6e22e">tag</span>, <span style="color:#a6e22e">index</span>) =&gt; <span style="color:#a6e22e">accumalator</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">tag</span>) ,<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">extract</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Tag list for header
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tags</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;javascript&#39;</span>, <span style="color:#e6db74">&#39;completed&#39;</span>, <span style="color:#e6db74">&#39;moved&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// addTagsToHeader :: [String] -&gt; String -&gt; String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addTagsToHeader</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">curry</span>((<span style="color:#a6e22e">tagList</span>,<span style="color:#a6e22e">str</span>) =&gt; <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">tagList</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">addTagsToHeader</span>(<span style="color:#a6e22e">toOrgTagList</span>(<span style="color:#a6e22e">tags</span>))(<span style="color:#e6db74">&#34;A Header&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">List</span>([<span style="color:#a6e22e">addTagsToHeader</span>(<span style="color:#a6e22e">toOrgTagList</span>(<span style="color:#a6e22e">tags</span>)),<span style="color:#a6e22e">toOrgHeader</span>, <span style="color:#a6e22e">toUpper</span>, <span style="color:#a6e22e">exclaim</span>]).<span style="color:#a6e22e">foldMap</span>(<span style="color:#a6e22e">Endo</span>, <span style="color:#a6e22e">Endo</span>.<span style="color:#a6e22e">empty</span>(<span style="color:#e6db74">&#39;&#39;</span>)).<span style="color:#a6e22e">run</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//&gt; A Header :javascript:completed:moved:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//&gt; HELLO!! :javascript:completed:moved:
+</span></span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/functional-programming/">Functional-Programming</a></li>
+      <li><a href="http://localhost:1313/tags/monoid/">Monoid</a></li>
+      <li><a href="http://localhost:1313/tags/javascript/">Javascript</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Mekael Turner Dev Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>The-Lambda-Calculus on Mekael Turner Dev Blog</title>
+    <link>http://localhost:1313/tags/the-lambda-calculus/</link>
+    <description>Recent content in The-Lambda-Calculus on Mekael Turner Dev Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Nov 2024 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/the-lambda-calculus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Expressing Lambda Calculus in Emacs Lisp</title>
+      <link>http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/</link>
+      <pubDate>Tue, 12 Nov 2024 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/expressing-lambda-calculus-in-emacs-lisp/</guid>
+      <description>&lt;p&gt;The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.&lt;/p&gt;
+&lt;p&gt;In this article, we&amp;rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

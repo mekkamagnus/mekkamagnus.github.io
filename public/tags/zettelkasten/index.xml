@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Zettelkasten on Mekael Turner Dev Blog</title>
+    <link>http://localhost:1313/tags/zettelkasten/</link>
+    <description>Recent content in Zettelkasten on Mekael Turner Dev Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Dec 2022 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/zettelkasten/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Zettelkasten Workflow</title>
+      <link>http://localhost:1313/posts/my-zettelkasten-workflow/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/my-zettelkasten-workflow/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;h2 id=&#34;emacs&#34;&gt;Emacs&lt;/h2&gt;
+&lt;h3 id=&#34;capture-templates&#34;&gt;Capture Templates&lt;/h3&gt;
+&lt;h2 id=&#34;org-roam&#34;&gt;Org-Roam&lt;/h2&gt;
+&lt;h2 id=&#34;browser&#34;&gt;Browser&lt;/h2&gt;
+&lt;h3 id=&#34;browser-options&#34;&gt;Browser Options&lt;/h3&gt;
+&lt;h3 id=&#34;capture-templates&#34;&gt;Capture Templates&lt;/h3&gt;</description>
+    </item>
+  </channel>
+</rss>
