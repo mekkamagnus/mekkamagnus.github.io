@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on Mekael Turner Dev Blog</title><link>https://mekkamagnus.github.io/posts/</link><description>Recent content in Posts on Mekael Turner Dev Blog</description><generator>Hugo -- 0.144.2</generator><language>en-us</language><lastBuildDate>Tue, 12 Nov 2024 00:00:00 +0800</lastBuildDate><atom:link href="https://mekkamagnus.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Expressing Lambda Calculus in Emacs Lisp</title><link>https://mekkamagnus.github.io/posts/expressing-lambda-calculus-in-emacs-lisp/</link><pubDate>Tue, 12 Nov 2024 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/expressing-lambda-calculus-in-emacs-lisp/</guid><description>&lt;p>The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Monoid on Mekael Turner Dev Blog</title><link>https://mekkamagnus.github.io/tags/monoid/</link><description>Recent content in Monoid on Mekael Turner Dev Blog</description><generator>Hugo -- 0.144.2</generator><language>en-us</language><lastBuildDate>Tue, 12 Nov 2024 00:00:00 +0800</lastBuildDate><atom:link href="https://mekkamagnus.github.io/tags/monoid/index.xml" rel="self" type="application/rss+xml"/><item><title>Expressing Lambda Calculus in Emacs Lisp</title><link>https://mekkamagnus.github.io/posts/expressing-lambda-calculus-in-emacs-lisp/</link><pubDate>Tue, 12 Nov 2024 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/expressing-lambda-calculus-in-emacs-lisp/</guid><description>&lt;p>The lambda calculus is a foundational mathematical framework for studying functions. It forms the bedrock of functional programming, offering a powerful and elegant way to define and manipulate functions. Emacs Lisp, a dialect of Lisp heavily used within the Emacs editor, offers a flexible environment for exploring these concepts.&lt;/p>
 &lt;p>In this article, we&amp;rsquo;ll embark on a journey to understand how the lambda calculus is expressed within Emacs Lisp, using illustrative examples to highlight the core concepts.&lt;/p></description></item><item><title>The Endo Monoid</title><link>https://mekkamagnus.github.io/posts/endo-monoid/</link><pubDate>Sun, 08 Oct 2023 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/endo-monoid/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>Endo can be used as a form of composition by concating functions. In this concatination functions results are fed into the concatted function.&lt;/p>
 &lt;p>The value is fed into Endo&amp;rsquo;s run function providing opportunities for lazy operations.&lt;/p>
@@ -75,86 +75,4 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">console&lt;/span>.&lt;span style="color:#a6e22e">log&lt;/span>(&lt;span style="color:#a6e22e">result&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//&amp;gt; HELLO!! :javascript:completed:moved:
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Functional Programming Concepts</title><link>https://mekkamagnus.github.io/posts/functional-programming/</link><pubDate>Sat, 07 Oct 2023 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/functional-programming/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
-&lt;p>This is essential a map of content for functional programming concepts that I&amp;rsquo;m learning.&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://mekkamagnus.github.io/posts/list-monad/">List Monad&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>List Monad in JavaScript</title><link>https://mekkamagnus.github.io/posts/list-monad/</link><pubDate>Sat, 07 Oct 2023 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/list-monad/</guid><description>&lt;h2 id="thoughts">Thoughts&lt;/h2>
-&lt;p>I&amp;rsquo;m writing this more as a way to document and organize my thoughts around the list monad.&lt;/p>
-&lt;p>This is a very important monad.&lt;/p>
-&lt;p>A map of functional concepts I&amp;rsquo;m currently studying can be found at &lt;a href="https://mekkamagnus.github.io/posts/functional-programming/">Functional Programming Concepts&lt;/a>.&lt;/p>
-&lt;h2 id="the-code">The Code&lt;/h2>
-&lt;p>&lt;a id="code-snippet--list-monad">&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">List&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">list&lt;/span> =&amp;gt; ({
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">list&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">map&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">fn&lt;/span> =&amp;gt; &lt;span style="color:#a6e22e">List&lt;/span>(&lt;span style="color:#a6e22e">list&lt;/span>.&lt;span style="color:#a6e22e">map&lt;/span>(&lt;span style="color:#a6e22e">fn&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fold&lt;/span>&lt;span style="color:#f92672">:&lt;/span> (&lt;span style="color:#a6e22e">fn&lt;/span>, &lt;span style="color:#a6e22e">initialValue&lt;/span>) =&amp;gt; &lt;span style="color:#a6e22e">List&lt;/span>(&lt;span style="color:#a6e22e">list&lt;/span>.&lt;span style="color:#a6e22e">reduce&lt;/span>(&lt;span style="color:#a6e22e">fn&lt;/span>, &lt;span style="color:#a6e22e">initialValue&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">foldMap&lt;/span>(&lt;span style="color:#a6e22e">monoid&lt;/span>, &lt;span style="color:#a6e22e">empty&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">mappedList&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">list&lt;/span>.&lt;span style="color:#a6e22e">reduce&lt;/span>(&lt;span style="color:#a6e22e">fn&lt;/span>, &lt;span style="color:#a6e22e">initialValue&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">result&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">mappedList&lt;/span>.&lt;span style="color:#a6e22e">reduce&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#a6e22e">accumalator&lt;/span>, &lt;span style="color:#a6e22e">monoidValue&lt;/span>) =&amp;gt; &lt;span style="color:#a6e22e">accumalator&lt;/span>.&lt;span style="color:#a6e22e">concat&lt;/span>(&lt;span style="color:#a6e22e">monoidValue&lt;/span>),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">empty&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> );
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">List&lt;/span>(&lt;span style="color:#a6e22e">result&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">extract&lt;/span>&lt;span style="color:#f92672">:&lt;/span> () =&amp;gt; &lt;span style="color:#a6e22e">list&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="example">Example&lt;/h3>
-&lt;p>Here is a sample implementation of this list monad.&lt;/p></description></item><item><title>My Zettelkasten Workflow</title><link>https://mekkamagnus.github.io/posts/my-zettelkasten-workflow/</link><pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/my-zettelkasten-workflow/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;h2 id="emacs">Emacs&lt;/h2>
-&lt;h3 id="capture-templates">Capture Templates&lt;/h3>
-&lt;h2 id="org-roam">Org-Roam&lt;/h2>
-&lt;h2 id="browser">Browser&lt;/h2>
-&lt;h3 id="browser-options">Browser Options&lt;/h3>
-&lt;h3 id="capture-templates">Capture Templates&lt;/h3></description></item><item><title>Why Lisp?</title><link>https://mekkamagnus.github.io/posts/why-lisp/</link><pubDate>Wed, 02 Nov 2022 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/why-lisp/</guid><description>&lt;h2 id="writing-lisp-code-is-easy">Writing Lisp Code is Easy&lt;/h2>
-&lt;ul>
-&lt;li>However good Lisp programming is hard according to Richard P. Gabriel.&lt;/li>
-&lt;/ul>
-&lt;h2 id="lisp-is-extremely-hackable">Lisp is extremely hackable&lt;/h2>
-&lt;ul>
-&lt;li>It&amp;rsquo;s easy to create a Lisp Language&lt;/li>
-&lt;li>It&amp;rsquo;s Easy to Make a Lisp Language Domain Specific&lt;/li>
-&lt;li>Writing a parser and compiler for Lisp is way claner than other languages&lt;/li>
-&lt;/ul>
-&lt;h2 id="emacs-is-configured-with-lisp">Emacs is configured with Lisp&lt;/h2>
-&lt;h2 id="lisp-helps-me-with-my-programmatic-thinking">Lisp Helps Me with My Programmatic Thinking&lt;/h2>
-&lt;ul>
-&lt;li>Once you know Lisp you think of programming in a very different way.&lt;/li>
-&lt;/ul>
-&lt;h2 id="lisp-has-heavy-ties-to-functional-programming">Lisp has heavy ties to Functional Programming&lt;/h2>
-&lt;ul>
-&lt;li>My interested in mathematics has motivated my interest in functional programming.&lt;/li>
-&lt;li>A lot of functional programming ideas implemented in other programming languages started in Lisp.&lt;/li>
-&lt;li>A lot of academic computer science work uses Lisp.&lt;/li>
-&lt;/ul>
-&lt;h2 id="common-lisp-s-object-oriented-system-is-great">Common Lisp&amp;rsquo;s Object-Oriented System is Great&lt;/h2>
-&lt;h2 id="development-of-programs-in-lisp-advance-faster-then-in-other-languages">Development of programs in Lisp advance faster then in other languages&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>Its easy to build a prototype of an idea in Lisp.&lt;/p></description></item><item><title>Tech I'm Intersted In</title><link>https://mekkamagnus.github.io/posts/tech_i_m_interested_in/</link><pubDate>Sat, 09 Apr 2022 00:00:00 +0800</pubDate><guid>https://mekkamagnus.github.io/posts/tech_i_m_interested_in/</guid><description>&lt;h2 id="focus-on-the-fundamentals">Focus on the Fundamentals&lt;/h2>
-&lt;ul>
-&lt;li>In all of my learning of programming and computer science I would like to keep a focus on having strong fundamentals. This desire to have strong fundamentals is what informs my decisions on what to learn and in what order.&lt;/li>
-&lt;/ul>
-&lt;h2 id="languages">Languages&lt;/h2>
-&lt;h3 id="javascript">JavaScript&lt;/h3>
-&lt;ul>
-&lt;li>Many sources online say you should take either JavaScript or Python as your first language.&lt;/li>
-&lt;li>I like that JavaScript has more of a closeness to C-syntax since C is a high priority on my list of languages to learn.&lt;/li>
-&lt;li>With JavaScript I can build and interact with the full stack of web development. I can work from browser to server. This means the skills I learn can be applied to more places.&lt;/li>
-&lt;li>JavaScript is thought of having a closeness to Lisp. So this also feeds in to my desire to learn Lisp.&lt;/li>
-&lt;li>In learning JavaScript I believe it will be easy to crossover into Python. But I don&amp;rsquo;t think it would be as easy the other way around. In the end, Python being a very important language, I will still get to learning it at some point no matter what.&lt;/li>
-&lt;li>It&amp;rsquo;s important to really grokk one language. Then it will be easier to pick up the rest because I will actually understand the core principles of programming.
-&lt;ul>
-&lt;li>Sort of like mastering one key in song writing. Then later it will be easy to pick up the rest of the keys.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>JavaScript works in the browser which means that I can build little applications that can run in browser. No need to download anything.&lt;/li>
-&lt;/ul>
-&lt;h3 id="lisp-elisp">Lisp/Elisp&lt;/h3>
-&lt;ul>
-&lt;li>I learned lisp because of reading that it will help you to be a better programming. However they also say it shouldn&amp;rsquo;t be your first language.&lt;/li>
-&lt;li>As a result of learning lisp I was lead towards Emacs&lt;/li>
-&lt;li>Emacs I believe also helps me to be a better programmer
-&lt;ul>
-&lt;li>
-&lt;p>All of the greatest engineers in the world use emacs&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
